@@ -5,10 +5,16 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const app = express();
  
+
 app.post('/blogs', (req, res) => {
-    fs.writeFileSync('MyFirstBlog.json', '{ "title": "My first blog", "content": "Lorem ipsum" }');
-    res.end('ok')
+  const title = req.body.title;
+  const content = req.body.content;
+  fs.writeFileSync(title, content);
+  res.end('ok');
 });
+
+
+
 
 app.put('/blogs', (req, res) => {
   if (fs.existsSync('MyFirstBlog.json')) {
